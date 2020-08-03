@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace C2InterpolatingSplines.Core
 {
-    public sealed class CircleCurveEvaluator
+    public sealed class SplineEvaluator
     {
-        public List<Vector2> Evaluate(Curve curve, ICircleCurveInterpolationProvider interpolationProvider)
+        public List<Vector2> Evaluate(Curve curve, IInterpolationFunctionProvider interpolationProvider)
         {
             if (curve.Points.Count < 3) return new List<Vector2>();
             
             var startIndex = curve.EndType == CurveEndType.Hide ? 0 : 1;
 
             var evaluatedPoints = new List<Vector2>();
-            CircleCurvePiece previousPiece = null;
+            SplinePiece previousPiece = null;
             for (var i = 0; i < curve.Points.Count - 2; ++i)
             {
                 var piece = interpolationProvider.Interpolate(curve.Points[i], curve.Points[i + 1], curve.Points[i + 2]);
@@ -23,7 +23,7 @@ namespace C2InterpolatingSplines.Core
                 {
                     for (var j = 0; j < 128; ++j)
                     {
-                        evaluatedPoints.Add(EvaluateCurve(previousPiece, currentPiece, j / 127f));
+                        evaluatedPoints.Add(EvaluateSection(previousPiece, currentPiece, j / 127f));
                     }
                 }
 
@@ -33,7 +33,7 @@ namespace C2InterpolatingSplines.Core
             return evaluatedPoints;
         }
 
-        private Vector2 EvaluateCurve(CircleCurvePiece piece1, CircleCurvePiece piece2, float t)
+        private Vector2 EvaluateSection(SplinePiece piece1, SplinePiece piece2, float t)
         {
             var p1 = EvaluatePiece(piece1, t, isFirstPiece: true);
             var p2 = EvaluatePiece(piece2, t, isFirstPiece: false);
@@ -43,7 +43,7 @@ namespace C2InterpolatingSplines.Core
             return Vector2.Lerp(p1, p2, weight);
         }
 
-        private Vector2 EvaluatePiece(CircleCurvePiece piece, float t, bool isFirstPiece)
+        private Vector2 EvaluatePiece(SplinePiece piece, float t, bool isFirstPiece)
         {
             var limits = isFirstPiece ? new Vector2(0, piece.Radian2) : new Vector2(piece.Radian1, 0);
             var tt = limits.x + t * (limits.y - limits.x);

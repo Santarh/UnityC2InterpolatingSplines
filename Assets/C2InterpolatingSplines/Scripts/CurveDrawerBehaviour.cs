@@ -27,7 +27,7 @@ namespace C2InterpolatingSplines
             if (_curve == null || _curve.points == null) return;
             
             var curve = new Curve(_curve.points, CurveEndType.Hide);
-            var evaluated = new CircleCurveEvaluator().Evaluate(curve, new CircleInterpolationProvider());
+            var evaluated = new SplineEvaluator().Evaluate(curve, new CircularInterpolationFunctionProvider());
 
             for (var i = 0; i < evaluated.Count - 1; ++i)
             {

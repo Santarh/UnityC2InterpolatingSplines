@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace C2InterpolatingSplines.Core
 {
-    public class CircleInterpolationProvider : ICircleCurveInterpolationProvider
+    public sealed class CircularInterpolationFunctionProvider : IInterpolationFunctionProvider
     {
         /// <summary>
         /// Get curve info from 3 points.
         /// index-1, index, index+1
         /// </summary>
-        public CircleCurvePiece Interpolate(Vector2 point0, Vector2 point1, Vector2 point2)
+        public SplinePiece Interpolate(Vector2 point0, Vector2 point1, Vector2 point2)
         {
             var ci = point1; // i
             var cj = point0; // i - 1
@@ -47,7 +47,7 @@ namespace C2InterpolatingSplines.Core
                 }
             }
 
-            return new CircleCurvePiece(center, axis1, axis2, limit1, limit2);
+            return new SplinePiece(center, axis1, axis2, limit1, limit2);
         }
     }
 }

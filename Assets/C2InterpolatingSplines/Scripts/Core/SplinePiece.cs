@@ -2,34 +2,34 @@ using UnityEngine;
 
 namespace C2InterpolatingSplines.Core
 {
-    public class CircleCurvePiece
+    public class SplinePiece
     {
         /// <summary>
-        /// 円の中心
+        /// Center Position.
         /// </summary>
         public Vector2 Center;
         
         /// <summary>
-        /// 円の第一軸
+        /// First Axis.
         /// </summary>
         public Vector2 Axis1;
         
         /// <summary>
-        /// 円の第二軸
+        /// Second Axis.
         /// </summary>
         public Vector2 Axis2;
 
         /// <summary>
-        /// P_i を 0 としたときの P_{i-1} の角度
+        /// radian is chosen such that F_i(0) = P_{i-1}
         /// </summary>
         public readonly float Radian1;
         
         /// <summary>
-        /// P_i を 0 としたときの P_{i+1} の角度
+        /// radian is chosen such that F_i(1) = P_{i+1}
         /// </summary>
         public readonly float Radian2;
 
-        public CircleCurvePiece(Vector2 center, Vector2 axis1, Vector2 axis2, float radian1, float radian2)
+        public SplinePiece(Vector2 center, Vector2 axis1, Vector2 axis2, float radian1, float radian2)
         {
             Center = center;
             Axis1 = axis1;
