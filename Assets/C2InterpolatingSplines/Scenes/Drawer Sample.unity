@@ -233,10 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60efcf2f8684af28e96601bbbe77d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
+  _controlPoints:
   - {x: -1.5681252, y: 2.7296996}
   - {x: -0.043559015, y: 4.050991}
-  - {x: 2.1053553, y: 2.7296999}
+  - {x: 2.1420887, y: 2.7174547}
   - {x: 5.5029593, y: 1.9746771}
   - {x: 4.7479362, y: -1.016377}
   - {x: 1.350331, y: -0.94377923}
@@ -244,6 +244,7 @@ MonoBehaviour:
   - {x: -0.95829713, y: 0.24683428}
   - {x: -3.8622332, y: 0.755023}
   - {x: -3.2378871, y: 2.3957467}
+  _endType: 0
 --- !u!4 &1307442801
 Transform:
   m_ObjectHideFlags: 0
@@ -288,6 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _curve: {fileID: 1307442800}
+  _drawControlLine: 1
+  _drawCurve: 1
 --- !u!4 &1917258889
 Transform:
   m_ObjectHideFlags: 0

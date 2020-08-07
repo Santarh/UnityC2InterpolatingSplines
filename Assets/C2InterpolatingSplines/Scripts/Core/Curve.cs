@@ -7,23 +7,13 @@ namespace C2InterpolatingSplines.Core
 {
     public sealed class Curve
     {
-        private readonly List<Vector2> _points = new List<Vector2>();
-
-        public IReadOnlyList<Vector2> Points => _points;
+        public IReadOnlyList<Vector2> Points { get; private set; }
         public CurveEndType EndType { get; private set; }
 
-        public Curve(IEnumerable<Vector2> points, CurveEndType endType)
+        public Curve(IReadOnlyList<Vector2> points, CurveEndType endType)
         {
-            foreach (var point in points)
-            {
-                _points.Add(point);
-            }
+            Points = points;
             EndType = endType;
-        }
-
-        public void AddPoint(Vector2 point)
-        {
-            _points.Add(point);
         }
 
         public static Curve Circle()
@@ -33,14 +23,7 @@ namespace C2InterpolatingSplines.Core
             {
                 var theta = math.radians(360f * x / division);
                 return new Vector2(math.cos(theta), math.sin(theta));
-            }), CurveEndType.Hide);
+            }).ToList(), CurveEndType.Hide);
         }
-    }
-
-    public enum CurveEndType
-    {
-        Hide = 0,
-        Show = 1,
-        Loop = 2,
     }
 }
